@@ -19,7 +19,7 @@ char questionText[20] = " ";
 
 // Specificerar SSID och lösenord för lokala wifinätverk
 
-const char *wifiSSIDs[] = {"SSID1"} //Det SSID man använder. 
+const char *wifiSSIDs[] = {"SSID1"}; //Det SSID man använder. 
 const char *wifiPassWords[] = {"Password1"}; //Lösenord till wifi
 const int numNetworks = sizeof(wifiSSIDs) /sizof(wifiSSIDs[0]);
 
