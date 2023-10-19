@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "util/delay.h"
 #include "uart.h"
-#include "esp8266.h"
+#include "ESP8266.h"
 
 #define _OK "OK"
 #define _CONNECT "CONNECT"
