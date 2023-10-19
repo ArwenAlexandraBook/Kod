@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "lcd.h"
-#include "esp8266.h"
+#include "ESP8266.h"
 
 #define RED_BUTTON_PIN 2    // Röda knappens pin
 #define YELLOW_BUTTON_PIN 4 // Gula knappens pin
