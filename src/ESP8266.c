@@ -24,7 +24,7 @@ int dataCount = 0;
 
 //Funktion som initerar ESP8266
 
-void esp8266_init(void)
+void ESPinit(void)
 {
     print("AT+RST\r\n");
     lcd_set_cursor (0,1);
@@ -68,7 +68,7 @@ void addData(char* name, int data) {
         strcat(HTTP,api_key);
     }
     strcat(HTTP, "&");
-    strcat(HHTP, name);
+    strcat(HTTP, name);
     strcat(HTTP, "=");
     memset(buffer, 0,strlen(buffer));
     itoa(data,buffer,10); //Omvandlar heltal till sträng
@@ -79,8 +79,6 @@ void addData(char* name, int data) {
 void pushData(void) {
 
     //Kolla omm ESP8266 är redo att skicka
-    ping();
-
     printf("AT+CIPSTART=0,\"TCP\",\"api.thingspeak.com\",%d\r\n",port)
     ping();
     //WaitFor(_OK);
