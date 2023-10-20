@@ -17,7 +17,7 @@
 char ssid[] = "Wokwi-GUEST";
 char psk[] ="";  //Inget lösenord.
 char api_key[] "32UCVEN8HC19WGQM"; //ThingSpeak API-nyckel (inget upplagt än!)
-int port =80;
+int port = 80;
 char buffer[64];
 char HTTP[512];
 int dataCount = 0; 
@@ -43,7 +43,7 @@ void esp8266_init(void)
     ping();
     //WaitFor(_OK);
     
-    _delay_us(500000); 
+    _delay_us(5000); 
 
 }
 
@@ -68,13 +68,11 @@ void addData(char* name, int data) {
         strcat(HTTP,api_key);
     }
     strcat(HTTP, "&");
-    strcat(HHTP, fieldName);
+    strcat(HHTP, name);
     strcat(HTTP, "=");
-
-    memset(buffer, 0,sizeof(buffer));
+    memset(buffer, 0,strlen(buffer));
     itoa(data,buffer,10); //Omvandlar heltal till sträng
     strcat(HTTP,buffer)
-
     dataCount++;
 }
 
@@ -83,19 +81,19 @@ void pushData(void) {
     //Kolla omm ESP8266 är redo att skicka
     ping();
 
-    printf("AT+CIPSTART=0,\"TCP\",\"api.thingspeak.com\",%d\r\n")
+    printf("AT+CIPSTART=0,\"TCP\",\"api.thingspeak.com\",%d\r\n",port)
     ping();
     //WaitFor(_OK);
 
     //Använd kanal 0 och definiera längden på message
     printf("AT+CIPSEND_0,%d\r\n", strlen(HTTP)+34); //Längden är 34
-    _delay_us(1000000);
+    _delay_us(1000);
     //ping();
     //waitFor(_OK);
     //WaitFor(_OK);
 
     //Skicka HTTP request med data 
-    printf("%s\nHHYP/1.1 Host: api.thingspeak.com\r\n",HTTP);
+    printf("%s\nHTTP/1.1 Host: api.thingspeak.com\r\n",HTTP);
 
     //Vänta på att mottagningen ska stängas
     ping();
@@ -113,16 +111,16 @@ void ping(void)
     //Kolla om ESP8266 svarar
     for(int i = 0 < 3;i++) {
         printf("AT\r\n");
-        memset(buffer,0,sizeof(buffer));
+        memset(buffer,0,strlen(buffer));
         scanf("%ns", buffer);
         if (strstr(buffer,"OK") == NULL)
-           _delay_us(100000);
+    {
+           _delay_us(1000);
 
-        } else {
-            break;
+        } else break;
         }
 }
 
 
 
-}
+
