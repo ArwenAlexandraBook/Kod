@@ -12,9 +12,9 @@ void uart_init(void)
     UBRR0L = UBBRRL_VALUE;
 
 #if USE_2X
-    UCSR0A |= _BV(U2x0);
+    UCSR0A |= _BV(U2X0);
 #else
-    UCSR0A &= ~(_BV(USX0));
+    UCSR0A &= ~(_BV(U2X0));
 #endif
 
  UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); /* 8-bitar data */ 
@@ -22,8 +22,11 @@ void uart_init(void)
 }
 int uart_putchar (char c, FILE *stream)
 {
+    // if (c == '\n') {
+    //     uart_putchar('\r', stream);
+    // }
   loop_until_bit_is_set(USCR0A, UDRE0);
-  UBR0 = c;
+  UDR0 = c;
   return(0);
 }
 
