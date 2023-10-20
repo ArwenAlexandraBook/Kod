@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 int uart_putchar(char c, FILE *stream);
-int uart_getchar(FIL *stream);
+int uart_getchar(FILE *stream);
 
 void uart_init(void);
 
