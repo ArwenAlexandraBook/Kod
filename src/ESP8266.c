@@ -16,7 +16,7 @@
 
 char ssid[] = "Wokwi-GUEST";
 char psk[] ="";  //Inget lösenord.
-char api_key[] "32UCVEN8HC19WGQM"; //ThingSpeak API-nyckel (inget upplagt än!)
+char api_key[] = "32UCVEN8HC19WGQM"; //ThingSpeak API-nyckel (inget upplagt än!)
 int port = 80;
 char buffer[64];
 char HTTP[512];
@@ -26,20 +26,22 @@ int dataCount = 0;
 
 void ESPinit(void)
 {
-    print("AT+RST\r\n");
+    
+    lcd_puts("Connect to wifi");
+    lcd_set_cursor(0, 1);
+    printf("AT+RST\r\n");
     lcd_set_cursor (0,1);
     ping();
 
-    lcd_set_cursor (0,1); 
-    lcd_puts("Connect to wifi")
-    printf("AT+CWJAP=\"%s\",\"%s\"\r\n"ssid,psk);
+    printf("AT+CWJAP=\"%s\",\"%s\"\r\n",ssid,psk);
     ping();
 
     printf("AT+CWMODE=1\r\n");
-    ping()
+
+    ping();
     //waitFor(_OK);
 
-    prinf("AT+CIPMUX=1\r\n");
+    printf("AT+CIPMUX=1\r\n");
     ping();
     //WaitFor(_OK);
     
@@ -72,14 +74,14 @@ void addData(char* name, int data) {
     strcat(HTTP, "=");
     memset(buffer, 0,strlen(buffer));
     itoa(data,buffer,10); //Omvandlar heltal till sträng
-    strcat(HTTP,buffer)
+    strcat(HTTP,buffer);
     dataCount++;
 }
 
 void pushData(void) {
 
     //Kolla omm ESP8266 är redo att skicka
-    printf("AT+CIPSTART=0,\"TCP\",\"api.thingspeak.com\",%d\r\n",port)
+    printf("AT+CIPSTART=0,\"TCP\",\"api.thingspeak.com\",%d\r\n",port);
     ping();
     //WaitFor(_OK);
 
@@ -107,7 +109,7 @@ void pushData(void) {
 void ping(void)
 {
     //Kolla om ESP8266 svarar
-    for(int i = 0 < 3;i++) {
+    for(int i = 0; i < 3;i++) {
         printf("AT\r\n");
         memset(buffer,0,strlen(buffer));
         scanf("%ns", buffer);
@@ -118,6 +120,7 @@ void ping(void)
         } else break;
         }
 }
+
 
 
 
