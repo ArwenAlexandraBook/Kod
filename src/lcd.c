@@ -1,14 +1,9 @@
-
 #include "lcd.h"
+
 #include <stdarg.h>
+#include <stdio.h>
 #include <util/delay.h>
 
-#define LCD_RS 2
-#define LCD_EN 3
-#define LCD_D0 4
-#define LCD_D1 5
-#define LCD_D2 6
-#define LCD_D3 7
 
 void lcd_send(uint8_t value, uint8_t mode);
 void lcd_write_nibble(uint8_t nibble);
@@ -26,7 +21,7 @@ void lcd_write(uint8_t value)
     lcd_send(value, 1);
 }
 
-voic lcd_send(uint8_t value, uint8_t mode)
+void lcd_send(uint8_t value, uint8_t mode)
 {
     if (mode)
     {
@@ -40,7 +35,7 @@ voic lcd_send(uint8_t value, uint8_t mode)
     // LCD_PORT = LCD_PORT & ~(1 << LCD_RW);
 
     lcd_write_nibble(value >> 4);
-    lcd write_nibble(value);
+    lcd_write_nibble(value);
 }
 
 void lcd_write_nibble(uint8_t nibble)
@@ -55,18 +50,25 @@ void lcd_write_nibble(uint8_t nibble)
 
 void lcd_init(void)
 {
-
-    LCD_DDR = LCD_DDR | (1 << LCD_RS)
-              // | (1 << LCD_RW)
-              | (1 << LCD_EN) | (1 << LCD_D0) | (1 << LCD_D1) | (1 << LCD_D2) | (1 << LCD_D3);
+    //Konfigurera pins som ouput
+    LCD_DDR = LCD_DDR 
+     | (1 << LCD_RS)         
+     // | (1 << LCD_RW)
+     | (1 << LCD_EN)
+     | (1 << LCD_D0)
+     | (1 << LCD_D1) 
+     | (1 << LCD_D2) 
+     | (1 << LCD_D3);
 
     // Vänta på att LCD;n ska vara redo
     _delay_us(500);
 
-    LCD_PORT = LCD_PORT & ~(1 << LCD_EN) & ~(1 << LCD_RS);
+    LCD_PORT = LCD_PORT
+     & ~(1 << LCD_EN)
+     & ~(1 << LCD_RS);
     // & ~(1 << LCD_RW);
 
-    _delay_us(41000);
+    _delay_us(4100);
 
     lcd_write_nibble(0x03); // Byt till 4 bit mode
     _delay_us(4100);
@@ -75,7 +77,7 @@ void lcd_init(void)
     _delay_us(4100);
 
     lcd_write_nibble(0x02) // Treje gången
-        _delay_us(4100);
+    _delay_us(4100);
 
     lcd_write_nibble(0x2);
 
@@ -195,4 +197,5 @@ void lcd_create_char(uint8_t location, uint8_t *charmap)
 
         lcd_puts(lcd_buffer);
     }
+
 
