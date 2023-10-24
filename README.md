@@ -29,7 +29,7 @@ Hantering av knappar: Koden interagerar med flera knappar kopplade till mikrokon
 
 ESP8266 Wi-Fi-modul: Koden innehåller funktioner för att interagera med en ESP8266 Wi-Fi-modul. Viktiga funktioner inkluderar:
 
-esp8266_init(): Initialiserar ESP8266-modulen.
+ESPinit(): Initialiserar ESP8266-modulen.
 addData() och pushData(): Används för att förbereda och skicka data till en fjärrserver, möjligtvis för IoT-dataöverföring.
 ping(): Används för att kontrollera om ESP8266-modulen svarar.
 Wi-Fi-konfiguration: Koden innehåller konfiguration för Wi-Fi SSID och lösenord, samt inställningar relaterade till ThingSpeak (IoT-plattform), inklusive API-nyckel och serverinformation. Koden försöker ansluta till ett Wi-Fi-nätverk med funktionen ConnectToWifi().
