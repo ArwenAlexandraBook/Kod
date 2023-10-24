@@ -1,5 +1,4 @@
 
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -77,6 +76,8 @@ void HandleButtonClick(char *txt)
 
 int main(void)
 {
+    sei ();
+    
    lcd_init();
    lcd_enable_blinking();
    lcd_enable_cursor();
@@ -103,3 +104,4 @@ while (1)
  }
 }
 return 0;
+}
