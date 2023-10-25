@@ -76,7 +76,10 @@ void HandleButtonClick(char *txt)
 
 int main(void)
 {
-    
+
+    millis_init();
+    sei(); 
+ 
    lcd_init();
    lcd_enable_blinking();
    lcd_enable_cursor();
