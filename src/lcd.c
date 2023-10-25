@@ -45,7 +45,7 @@ void lcd_write_nibble(uint8_t nibble)
     LCD_PORT = LCD_PORT & ~(1 << LCD_EN);
     LCD_PORT = LCD_PORT | (1 << LCD_EN);
     LCD_PORT = LCD_PORT & ~(1 << LCD_EN);
-    _delay_us(300);
+    _delay_ms(0.3); // Fördröjning i miilisekunder 
 }
 
 void lcd_init(void)
@@ -61,32 +61,32 @@ void lcd_init(void)
      | (1 << LCD_D3);
 
     // Vänta på att LCD;n ska vara redo
-    _delay_us(500);
+    _delay_ms(50);
 
     LCD_PORT = LCD_PORT
      & ~(1 << LCD_EN)
      & ~(1 << LCD_RS);
     // & ~(1 << LCD_RW);
 
-    _delay_us(4100);
+    _delay_us(4.1);
 
     lcd_write_nibble(0x03); // Byt till 4 bit mode
-    _delay_us(4100);
+    _delay_ms(4.1);
 
     lcd_write_nibble(0x03); // Andra gången
-    _delay_us(4100);
+    _delay_us(4.1);
 
     lcd_write_nibble(0x02) // Treje gången
-    _delay_us(4100);
+    _delay_ms(4.1);
 
-    lcd_write_nibble(0x2);
+    lcd_write_nibble(0x2); 
 
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4100);
+    _delay_us(4.1);
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4100);
+    _delay_us(4.1);
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4100);
+    _delay_us(4.1);
 
     lcd_displayparams = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
     lcd_command(LCD_DISPLAYCONTROL | lcd_displayparams);
@@ -107,13 +107,13 @@ void lcd_off(void)
 void lcd_clear(void)
 {
     lcd_command(LCD_CLEARDISPLAY);
-    _delay_us(2000);
+    _delay_ms(2);
 }
 
 void lcd_return_home(void)
 {
     lcd_command(LCD_RETURNHOME);
-    _delay_us(2000);
+    _delay_ms(2);
 }
 void lcd_enable_blinking(void)
 {
@@ -171,7 +171,7 @@ void lcd_disable_autoscroll(void)
 }
 void lcd_create_char(uint8_t location, uint8_t *charmap)
 {
-    lcd_command(LCD_SETCGRAMADDR | ((location & 0x7) << 3));
+    lcd_command(LCD_SETGRAMADDR | ((location & 0x7) << 3));
     for (int i = 0; i < 8; i++)
     {
         lcd_write(charmap[i]);
