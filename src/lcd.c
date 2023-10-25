@@ -68,13 +68,13 @@ void lcd_init(void)
      & ~(1 << LCD_RS);
     // & ~(1 << LCD_RW);
 
-    _delay_us(4.1);
+    _delay_ms(4.1);
 
     lcd_write_nibble(0x03); // Byt till 4 bit mode
     _delay_ms(4.1);
 
     lcd_write_nibble(0x03); // Andra gången
-    _delay_us(4.1);
+    _delay_ms(4.1);
 
     lcd_write_nibble(0x02) // Treje gången
     _delay_ms(4.1);
