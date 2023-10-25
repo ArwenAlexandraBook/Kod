@@ -82,11 +82,11 @@ void lcd_init(void)
     lcd_write_nibble(0x2); 
 
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4.1);
+    _delay_ms(4.1);
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4.1);
+    _delay_ms(4.1);
     lcd_command(LCD_FUNCTIONSET | LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS);
-    _delay_us(4.1);
+    _delay_ms(4.1);
 
     lcd_displayparams = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
     lcd_command(LCD_DISPLAYCONTROL | lcd_displayparams);
