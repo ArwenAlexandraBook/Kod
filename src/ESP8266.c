@@ -45,7 +45,7 @@ void ESPinit(void)
     ping();
     //WaitFor(_OK);
     
-    _delay_us(5000); 
+    _delay_ms(500); 
 
 }
 
@@ -57,7 +57,7 @@ void waitFor(char* response)
     scanf("\n%s",buffer);   //Få meddelande från ESP8266
     if (strstr(buffer,response)  == NULL)
     {
-        delay_us(500000); //Fördröjning i mikrosekunder
+        _delay_ms(500); //Fördröjning i mikrosekunder
     } else break;
  }
 
@@ -87,7 +87,7 @@ void pushData(void) {
 
     //Använd kanal 0 och definiera längden på message
     printf("AT+CIPSEND_0,%d\r\n", strlen(HTTP)+34); //Längden är 34
-    _delay_us(1000);
+    _delay_ms(1000);
     //ping();
     //waitFor(_OK);
     //WaitFor(_OK);
@@ -115,12 +115,11 @@ void ping(void)
         scanf("%ns", buffer);
         if (strstr(buffer,"OK") == NULL)
     {
-           _delay_us(1000);
+           _delay_ms(1000);
 
         } else break;
         }
 }
-
 
 
 
