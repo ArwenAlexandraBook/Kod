@@ -7,7 +7,9 @@
 #warning "Please define LCD_DDR and LCD_PORT"
 #define LCD_DDR DDRB
 #define LCD_PORT PORTB
-#endif
+
+
+#endif 
 
 #ifndef LCD_RS
 #warning "LCD using default pin".
@@ -30,6 +32,7 @@
 #define LCD_DISPLAYCONTROL 0x08
 #define LCD_CURSORSHIFT 0x10
 #define LCD_FUNCTIONSET 0X20
+#define LCD_SETGRAMADDR 0x40
 #define LCD_SETDDRAMADDR 0x80
 
 #define LCD_ENTRYRIGHT 0x00
@@ -40,6 +43,8 @@
 #define LCD_DISPLAYON 0x04
 #define LCD_DISPLAYOFF 0x00
 #define LCD_CURSORON 0x01
+#define LCD_CURSOROFF 0x00
+#define LCD_BLINKON 0x01
 #define LCD_BLINKOFF 0x00
 
 #define LCD_DISPLAYMOVE 0x08
@@ -85,4 +90,3 @@ void lcd_set_cursor(uint8_t col, uint8_t row);
 
 void lcd_puts(char *string);
 void lcd_printf(char *format, ...);
-
