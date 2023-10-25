@@ -49,7 +49,7 @@ int numEvents = 0;
 
 void HandleButtonClick(char *txt)
 {
-    _delay_us(2000); //Förfröjning mikrosekunder
+    _delay_ms(20); //Förfröjning mikrosekunder
     strncat(currentText, txt);
     lcd_set_cursor(0, 1);
     lcd_puts(currentText);
