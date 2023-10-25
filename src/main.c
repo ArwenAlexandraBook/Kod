@@ -4,7 +4,7 @@
 #include <util/delay.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
+#include "millis.h"
 #include "lcd.h"
 #include "ESP8266.h"
 
@@ -64,7 +64,7 @@ void HandleButtonClick(char *txt)
         else
         {
             lcd_printf("Incorrct code!"); // Felmeddelande
-            _delay_us(3000); //Fördröjning i mikrosekunder
+            _delay_ms(30); //Fördröjning i mikrosekunder
             lcd_set_cursor(0, 1); // LCD-cursor rad 1
             lcd_puts("  "); //Rensar raden
             lcd_set_cursor(0, 1); //Återgår till rad 1
@@ -76,12 +76,11 @@ void HandleButtonClick(char *txt)
 
 int main(void)
 {
-    sei ();
     
    lcd_init();
    lcd_enable_blinking();
    lcd_enable_cursor();
-   _delay_us(1000);
+   _delay_ms(10);
 
 
    Set_Button_As_Input_Pullup (DDRB, PORTB, RED_BUTTON_PIN_1);
